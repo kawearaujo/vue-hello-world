@@ -1,67 +1,67 @@
 <template>
   <div class="container shadow-lg px-5 py-5 rounded-3">
-      <h1>Lista de Afazeres</h1>
+    <h1 class="mb-5">Lista de Afazeres</h1>
 
-        <div class="d-flex">
-            <input 
-                class="form-control form-input me-3"
-                v-model="newTodo" 
-                type="text" placeholder="Ex: Fazer caminhada"/>
-            <button type="submit" class="submit-btn" @click="addTodo()"> + </button>
-        </div>
-
-            <div
-                class="row todo-list shadow px-3 pt-3 pb-2 align-items-center mb-4"
-                c-for="(todo, index) in todos"
-                :key="index"
-            >
-                <div class="col-7 text-start">
-                    <h5 :class="{ 'todo-finised': todo.status === 'finished' }">
-                        {{ todo.name }}
-                    </h5>
-                </div>
-                <div class="col-2">
-                    <div class="d-flex justify-content-start align-items-center">
-                        <div class="status-indicator mb-1 me-2"
-                        :class="{
-                            'status-indicator-todo': todo.status === 'to-do',
-                            'status-indicator-ongoing': todo.status === 'on-going',
-                            'status-indicator-finished': todo.status === 'finished',
-                        }"
-                        ></div>
-                        <div class="status-text"
-                        @click="changeStatus(index)"
-                        :class="{
-                            'status-text-todo': todo.status === 'to-do',
-                            'status-text-ongoing': todo.status === 'on-going',
-                            'status-text-finished': todo.status === 'finished',
-                        }"
-                        >
-                            <h5>{{ todo.status }}</h5>
-                        </div>
+    <div class="d-flex mb-5">
+        <input 
+            class="form-control form-input me-3"
+            v-model="newTodo" 
+            type="text" placeholder="Ex: Fazer caminhada"/>
+        <button type="submit" class="submit-btn" @click="addTodo()"> + </button>
+    </div>
+          <!--Div com a lista-->
+        <div  
+            class="row todo-list shadow px-3 pt-3 pb-2 align-items-center "
+            v-for="(todo, index) in todos"
+            :key="index"
+        >
+            <div class="col-7 text-start">
+                <h5 :class="{ 'todo-finished': todo.status === 'finished' }">
+                    {{ todo.name }}
+                </h5>
+            </div>
+            <div class="col-2">
+                <div class="d-flex justify-content-start align-items-center">
+                    <div class="status-indicator mb-1 me-2"
+                    :class="{
+                        'status-indicator-todo': todo.status === 'to-do',
+                        'status-indicator-ongoing': todo.status === 'on-going',
+                        'status-indicator-finished': todo.status === 'finished',
+                    }"
+                    ></div>
+                    <div class="status-text"
+                    @click="changeStatus(index)"
+                    :class="{
+                        'status-text-todo': todo.status === 'to-do',
+                        'status-text-ongoing': todo.status === 'on-going',
+                        'status-text-finished': todo.status === 'finished',
+                    }"
+                    >
+                        <h5>{{ todo.status }}</h5>
                     </div>
                 </div>
-                <div class="col-3 text-end action-btn">
-                    <div class="d-flex justify-contet-end">
-                        <div class="" @click="upTodo(index)">
-                            <i class="uil uil-arrow-up ms-4"></i>
-                        </div>
-                        <div class="" @click="downTodo(index)">
-                            <i class="uil uil-arrow-down"></i>
-                        </div>
-                        <div class="" @click="editTodo(index)">
-                            <i class="uil uil-edit-alt ms-4"></i>
-                        </div>
-                        <div class="" @click="deleteTodo(index)">
-                            <i class="uil uil-trash-alt ms-4"></i>
-                        </div>
-
-
+            </div>
+            <div class="col-3 text-end action-btn">
+                <div class="d-flex justify-content-end">
+                    <div class="" @click="upTodo(index)">
+                        <i class="uil uil-arrow-up ms-4"></i>
                     </div>
+                    <div class="" @click="downTodo(index)">
+                        <i class="uil uil-arrow-down"></i>
+                    </div>
+                    <div class="" @click="editTodo(index)">
+                        <i class="uil uil-edit-alt ms-4"></i>
+                    </div>
+                    <div class="" @click="deleteTodo(index)">
+                        <i class="uil uil-trash-alt ms-4"></i>
+                    </div>
+
 
                 </div>
 
             </div>
+
+        </div>
       
   </div>
 </template>
@@ -113,7 +113,7 @@ export default {
             this.todos.splice(index,1);
         },
         // Metodo change status
-        chanceStatus(index){
+        changeStatus(index){
             let statusIndex = this.todoStatus.indexOf(this.todos[index].status);
             if(++statusIndex>2) statusIndex= 0;
             this.todos[index].status = this.todoStatus[statusIndex];
@@ -176,7 +176,7 @@ export default {
   background: red;
 }
 .status-indicator-ongoing {
-  background: yellow;
+  background:rgb(0, 162, 255);
 }
 .status-indicator-finished {
   background: green;
@@ -189,7 +189,7 @@ export default {
   color: red;
 }
 .status-text-ongoing {
-  color: yellow;
+  color: rgb(0, 162, 255);
 }
 .status-text-finished {
   color: green;
